@@ -2,6 +2,7 @@ import sys
 sys.path.append("../automation/")
 import csv
 import os
+
 from unittest.mock import MagicMock, patch, call, Mock
 
 from automation import configrsu_msgfwd
@@ -16,28 +17,21 @@ def test_ip_to_hex_big_endian():
   hex = configrsu_msgfwd.ip_to_hex(ip, 1)
   assert hex == '08080808000000000000000000000000'
 
-def test_rsu_status_off():
+@patch.object(os, 'system')
+def test_rsu_status_off(system):
+  os.system = MagicMock(return_value='')
   rsu_ip = '0.0.0.0'
   
-  # Since there is no snmp server, simply running the shell command successfully should suffice
-  try:
-    configrsu_msgfwd.set_rsu_status(rsu_ip, False)
-    assert True
-  except Exception as e:
-    print('Encountered issue: {}'.format(e))
-    assert False
+  configrsu_msgfwd.set_rsu_status(rsu_ip, False)
+  os.system.assert_called_with('snmpset -v 3 -u None -a SHA -A None -x AES -X None -l authNoPriv 0.0.0.0 RSU-MIB:rsuMode.0 i 2')
 
-
-def test_rsu_status_on():
+@patch.object(os, 'system')
+def test_rsu_status_on(system):
+  os.system = MagicMock(return_value='')
   rsu_ip = '0.0.0.0'
   
-  # Since there is no snmp server, simply running the shell command successfully should suffice
-  try:
-    configrsu_msgfwd.set_rsu_status(rsu_ip, True)
-    assert True
-  except Exception as e:
-    print('Encountered issue: {}'.format(e))
-    assert False
+  configrsu_msgfwd.set_rsu_status(rsu_ip, True)
+  os.system.assert_called_with('snmpset -v 3 -u None -a SHA -A None -x AES -X None -l authNoPriv 0.0.0.0 RSU-MIB:rsuMode.0 i 4')
 
 @patch.object(os, 'system')
 @patch.object(configrsu_msgfwd, 'set_rsu_status')
@@ -51,11 +45,21 @@ def test_main(ip_to_hex, set_rsu_status, system):
   dir_path = os.path.dirname(real_path)
   file = os.path.join(dir_path, 'test_files', 'snmp_test.csv')
   dest_ip = '8.8.8.8'
-  udp_port = 46800
-  rsu_index = 20
+  msg_type = 'bsm'
     
   with open(file, newline='') as csvfile:
     doc = csv.reader(csvfile, delimiter=',')
-    configrsu_msgfwd.main(doc, dest_ip, udp_port, rsu_index, 0)
+    configrsu_msgfwd.main(doc, dest_ip, msg_type)
   
   os.system.assert_called_with('snmpwalk -v 3 -u None -a SHA -A None -x AES -X None -l authNoPriv 172.16.28.190 1.0.15628.4.1 | grep 4.1.7')
+
+def test_unsupported_message_type():
+  real_path = os.path.realpath(__file__)
+  dir_path = os.path.dirname(real_path)
+  file = os.path.join(dir_path, 'test_files', 'snmp_test.csv')
+  dest_ip = '8.8.8.8'
+  msg_type = 'test'
+    
+  with open(file, newline='') as csvfile:
+    doc = csv.reader(csvfile, delimiter=',')
+    assert configrsu_msgfwd.main(doc, dest_ip, msg_type) == -1

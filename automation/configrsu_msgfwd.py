@@ -43,19 +43,35 @@ def config_msgfwd(rsu_ip, dest_ip, udp_port, rsu_index, endian):
   # Stop datetime, hex value 0C1F07B21100 is Dec 31, 2036 17:00
   os.system('snmpset -v 3 {auth} {rsuip} RSU-MIB:rsuDsrcFwdDeliveryStop.{index} x 0C1F07F41100'.format(auth=snmp_authstring, rsuip=rsu_ip, index=rsu_index))
   os.system('snmpset -v 3 {auth} {rsuip} RSU-MIB:rsuDsrcFwdEnable.{index} i 1'.format(auth=snmp_authstring, rsuip=rsu_ip, index=rsu_index))
+  os.system('snmpset -v 3 {auth} {rsuip} RSU-MIB:rsuDsrcFwdStatus.{index} i 1'.format(auth=snmp_authstring, rsuip=rsu_ip, index=rsu_index))
 
   # Put RSU in run mode
   set_rsu_status(rsu_ip, operate=True)
   
   os.system('snmpwalk -v 3 {auth} {rsuip} 1.0.15628.4.1 | grep 4.1.7'.format(auth=snmp_authstring, rsuip=rsu_ip))
 
-def main(rsu_csv, dest_ip, udp_port, rsu_index, endian):
-  for row in rsu_csv: 
-    config_msgfwd(row[0], str(dest_ip), str(udp_port), str(rsu_index), int(endian))
+def main(rsu_csv, dest_ip, msg_type):
+  # Based on message type, choose the right port
+  udp_port = None
+  if msg_type.lower() == 'bsm':
+    udp_port = 46800
+  else:
+    print('Supported message type is currently only BSM')
+    return -1
+  
+  for row in rsu_csv:
+    # Based on RSU version, choose the right type of endian format
+    endian = None
+    if row[1] == '4.4':
+      endian = 1
+    else:
+      endian = 0
+      
+    config_msgfwd(row[0], str(dest_ip), str(udp_port), '1', endian)
 
 if __name__ == '__main__':
   with open(sys.argv[1], newline='') as csvfile:
     doc = csv.reader(csvfile, delimiter=',')
-	# rsu_csv, dest_ip, udp_port, rsu_index, endian_type
-    main(doc, sys.argv[2], sys.argv[3], sys.argv[4], sys.argv[5])
+	# rsu_csv, dest_ip, msg_type
+    main(doc, sys.argv[2], sys.argv[3])
     
