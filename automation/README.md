@@ -14,23 +14,21 @@ To run the `configrsu_msgfwd.py` script you must provide it some information so 
 
 - Environment variables os.environ['SNMP_USERNAME'] and os.environ['SNMP_PASSWORD'] must be set. These must be set to the CDOT RSU's SNMP credentials
 
-- A one column CSV or text file containing a list of RSU IP addresses this can look like the following:
+- A two column CSV or text file containing a list of RSU IP addresses and their associated RSU version. This can look like the following:
 ```
-10.0.0.1
-10.0.0.2
-10.0.0.3
-10.0.0.4
+10.0.0.1,4.6
+10.0.0.2,3.8
+10.0.0.3,4.4
+10.0.0.4,3.8
 ```
 - The destination IP. Example: `10.0.1.5`
-- The UDP port the RSU should forward the packets to at the destination IP. Example: `46800`
-- The RSU index the SNMP configuration should be written to on the RSU. Example: `20`
-- Endian type. Little endian = 0. Big endian = 1. Any number outside of these will default to big endian.
+- The message type. Example `BSM`
 
 These will be provided to the script in the form of arguments.
 
 Check out the example shell command to run the script in a terminal:
 ```
-python3 configrsu_msgfwd.py /home/user/RSU_Management/tests/test_files/snmp_test.csv 10.0.1.5 46800 20 0
+python3 configrsu_msgfwd.py /home/user/RSU_Management/tests/test_files/snmp_test.csv 10.0.1.5 BSM
 ```
 
 ## Setting up SNMP on external machine
