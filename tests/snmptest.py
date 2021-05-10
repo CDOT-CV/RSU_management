@@ -2,11 +2,9 @@ import sys
 sys.path.append("../automation/")
 import csv
 import os
+from unittest.mock import MagicMock, patch, call, Mock
 
 from automation import configrsu_msgfwd
-
-os.environ['SNMP_USERNAME'] = 'testUsertest'
-os.environ['SNMP_PASSWORD'] = 'testpasswordtest'
 
 def test_ip_to_hex_little_endian():
   ip = '8.8.8.8'
@@ -29,6 +27,7 @@ def test_rsu_status_off():
     print('Encountered issue: {}'.format(e))
     assert False
 
+
 def test_rsu_status_on():
   rsu_ip = '0.0.0.0'
   
@@ -40,20 +39,23 @@ def test_rsu_status_on():
     print('Encountered issue: {}'.format(e))
     assert False
 
-def test_main():
+@patch.object(os, 'system')
+@patch.object(configrsu_msgfwd, 'set_rsu_status')
+@patch.object(configrsu_msgfwd, 'ip_to_hex')
+def test_main(ip_to_hex, set_rsu_status, system):
+  configrsu_msgfwd.set_rsu_status = MagicMock(return_value='')
+  configrsu_msgfwd.ip_to_hex = MagicMock(return_value='08080808000000000000000000000000')
+  os.system = MagicMock(return_value='')
+
   real_path = os.path.realpath(__file__)
   dir_path = os.path.dirname(real_path)
   file = os.path.join(dir_path, 'test_files', 'snmp_test.csv')
   dest_ip = '8.8.8.8'
   udp_port = 46800
   rsu_index = 20
+    
+  with open(file, newline='') as csvfile:
+    doc = csv.reader(csvfile, delimiter=',')
+    configrsu_msgfwd.main(doc, dest_ip, udp_port, rsu_index, 0)
   
-  # Since there is no snmp server, simply running the shell commands successfully should suffice
-  try:
-    with open(file, newline='') as csvfile:
-      doc = csv.reader(csvfile, delimiter=',')
-      configrsu_msgfwd.main(doc, dest_ip, udp_port, rsu_index, 0)
-    assert True
-  except Exception as e:
-    print('Encountered issue: {}'.format(e))
-    assert False
+  os.system.assert_called_with('snmpwalk -v 3 -u None -a SHA -A None -x AES -X None -l authNoPriv 172.16.28.190 1.0.15628.4.1 | grep 4.1.7')
