@@ -2,13 +2,11 @@ import sys
 sys.path.append("../automation/")
 import csv
 import os
-import pytest
-from unittest import TestCase
 
-import configrsu_msgfwd
+from automation import configrsu_msgfwd
 
-os.environ['SNMP_USERNAME'] = 'testUser'
-os.environ['SNMP_PASSWORD'] = 'testpassword'
+os.environ['SNMP_USERNAME'] = 'testUsertest'
+os.environ['SNMP_PASSWORD'] = 'testpasswordtest'
 
 def test_ip_to_hex_little_endian():
   ip = '8.8.8.8'
@@ -43,7 +41,9 @@ def test_rsu_status_on():
     assert False
 
 def test_main():
-  file = 'test_files/snmp_test.csv'
+  real_path = os.path.realpath(__file__)
+  dir_path = os.path.dirname(real_path)
+  file = os.path.join(dir_path, 'test_files', 'snmp_test.csv')
   dest_ip = '8.8.8.8'
   udp_port = 46800
   rsu_index = 20
