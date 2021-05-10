@@ -3,7 +3,7 @@ sys.path.append("../automation/")
 import csv
 import os
 
-from unittest.mock import MagicMock, patch, call, Mock
+from unittest.mock import MagicMock, patch
 
 from automation import configrsu_msgfwd
 
