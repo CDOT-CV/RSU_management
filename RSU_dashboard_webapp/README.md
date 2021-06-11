@@ -61,6 +61,7 @@ cd name_of_gcp_webapp_dir
 gcloud app deploy
 ```
 Note: for first-time deployment, the project will need to be configured. Answer appropriately when prompted (for instance, enter "Y" when prompted "Do you want to continue (Y/n)?")
+
 8. Once the deployment is completed, run the app to obtain the GCP-provided URL hosting the web app.
 ```
 gcloud app browse
