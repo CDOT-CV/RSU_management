@@ -1,0 +1,25 @@
+<div id="mapa-mapbox"></div>
+<ng-sidebar-container>
+    <!-- Sidebar -->
+    <ng-sidebar [opened]="opened">
+        <h1><b>RSU Dashboard Sidebar</b></h1>
+        <button (click)="toggleSidebar()">Close Sidebar</button>
+        <div style="top:40px;">
+            <p><br><br>This proof-of-concept is meant to demonstrate a GCP deployment of an Angular-Mapbox project. The purpose of this demonstration is solely to test the functionality of the application. All user design and aesthetic choices are subject to change.</p></div>
+    </ng-sidebar>
+
+    <div ng-sidebar-content>
+        <!--Page Contents-->
+        <button (click)="toggleSidebar()">
+            Open Sidebar
+        </button>
+
+        <div class="module one">Active TIMs</div>
+        <div class="module two">RSU Network</div>
+        <div class="module three">RSU Count</div>
+        <div class="module four">DSRC Status</div>
+        <div class="module five">IPv6 Status</div>
+        <div class="module six">IPv4 Status</div>
+
+    </div>    
+</ng-sidebar-container>

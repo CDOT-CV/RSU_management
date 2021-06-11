@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CDOT RSU Dashboard: Proof-of-Concept</title>
+  <style type="text/css" media="screen">
+    * {
+        margin: 0; 
+        padding: 0;
+      }
+
+      div#banner { 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        background-color: #87be2f; 
+        width: 100%; 
+      }
+      div#banner-content { 
+        width: 800px;
+        font-family:monospace; 
+        font-size:20px;
+        position:left; 
+        padding: 10px; 
+      }
+      div#main-content { 
+        padding-top: 70px;
+      }
+  </style>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+
+<body>
+  <app-root></app-root>
+  <div id="banner">
+    <div id="banner-content">
+      <b>CDOT Connected Vehicle Monitor: Proof-of-Concept</b>
+    </div>
+  </div>
+</body>
+</html>

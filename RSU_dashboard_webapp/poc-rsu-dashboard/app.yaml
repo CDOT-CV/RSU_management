@@ -1,0 +1,9 @@
+runtime: python38
+
+handlers:
+- url: /
+  static_files: dist/poc-rsu-dashboard/index.html
+  upload: dist/poc-rsu-dashboard/index.html
+
+- url: /
+  static_dir: dist/poc-rsu-dashboard
