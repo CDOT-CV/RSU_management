@@ -2,9 +2,10 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// inject Mapbox token here
 export const environment = {
   production: false,
-  mapboxKey: 'pk.eyJ1IjoiZGhpdmFoYXJpIiwiYSI6ImNrcGRjZ3M1eDAwYzEydWxlMnJyZGVxMjcifQ.efNPeYDF1pGv85w4LBQmFA'
+  mapboxKey: 'xx.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxx'
 };
 
 /*
