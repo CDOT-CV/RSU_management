@@ -29,7 +29,7 @@ These will be provided to the script in the form of arguments.
 
 Check out the example shell command to run the script in a terminal:
 ```
-python3 configrsu_msgfwd.py /home/user/RSU_Management/tests/test_files/snmp_test.csv 10.0.1.5 BSM 1
+python3 configKapschrsu_msgfwd.py /home/user/RSU_Management/tests/test_files/snmp_test.csv 10.0.1.5 BSM 1
 ```
 
 ## Setting up SNMP on external machine
