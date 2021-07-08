@@ -10,7 +10,7 @@ The script can currently perform two main tasks:
   - The script currently is only supporting UDP message forwarding
 
 ## Running the script
-To run the `configrsu_msgfwd.py` script you must provide it some information so that it can do its job and run it on a machine that is configured to use SNMP, specifically `snmpwalk` and `snmpset`. This involves both environment variables and arguments that are provided directly to the script.
+To run the `configKapschrsu_msgfwd.py` script you must provide it some information so that it can do its job and run it on a machine that is configured to use SNMP, specifically `snmpwalk` and `snmpset`. This involves both environment variables and arguments that are provided directly to the script.
 
 - Environment variables os.environ['SNMP_USERNAME'] and os.environ['SNMP_PASSWORD'] must be set. These must be set to the CDOT RSU's SNMP credentials
 
@@ -23,12 +23,13 @@ To run the `configrsu_msgfwd.py` script you must provide it some information so 
 ```
 - The destination IP. Example: `10.0.1.5`
 - The message type. Example `BSM`
+- The SNMP index. Example `1`
 
 These will be provided to the script in the form of arguments.
 
 Check out the example shell command to run the script in a terminal:
 ```
-python3 configrsu_msgfwd.py /home/user/RSU_Management/tests/test_files/snmp_test.csv 10.0.1.5 BSM
+python3 configrsu_msgfwd.py /home/user/RSU_Management/tests/test_files/snmp_test.csv 10.0.1.5 BSM 1
 ```
 
 ## Setting up SNMP on external machine
