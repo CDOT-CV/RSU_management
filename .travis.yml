@@ -6,6 +6,7 @@ branches:
     - main
     - dev
     - CV-29
+    - snmp-automation
 addons:
   sonarcloud:
     organization: "cdot-cv"
