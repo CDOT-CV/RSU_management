@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import ReactMapGL, { Marker, Popup } from "react-map-gl"
 import RsuMarker from './RsuMarker';
+import Header from './Header';
 
 const axios = require('axios').default;
 
@@ -49,6 +50,7 @@ function Map(props) {
         onViewportChange={(viewport) => {
           setViewport(viewport);
         }}>
+          <Header/>
 
           {props.rsuData.map((rsu) => (
             <Marker 
@@ -87,7 +89,7 @@ function Map(props) {
                   Serial Number: {selectedRsu.properties.SerialNumber ? 
                   selectedRsu.properties.SerialNumber : 'Unknown'}
                 </p>
-                <p class="popop-p">Counts: {selectedRsuCount}</p>
+                <p class="popop-p">BSM Counts: {selectedRsuCount}</p>
               </div>
 
             </Popup>
