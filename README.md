@@ -11,7 +11,7 @@ This project is an open-source, proof-of-concept for the roadside unit (RSU) dat
 
 The data_manager directory contains two sub-directories: sample_files and source_code. The former directory holds the sample_files used during the design, implementation and testing of this project. The RSU-ND.json file is an example of the type of JSON string retrieved from an RSU. The sample_creds.json file is an example format of the credentials issued by the Google Cloud Platform (GCP), which is passed into the main.py script and enables the user to access the GCP.
 
-The cdot-web-app directory contains a React-js project that utilizes a RESTful API Gateway hosted through GCP to receive data about RSUs along I-70 and C-470. This data ranges from identifying characteristics such as RSU IP address or serial number to other RSU related data such as the number of BSM messages a RSU has forwarded after receiving. This project can be edited to display RSU data for anywhere necessary but would require changes to both the back-end specified backend and various values in the fontend to do this. This README will not cover how to go about this.
+The cdot-web-app directory contains a React-js project that utilizes a RESTful API Gateway hosted through GCP to receive data about RSUs along I-70 and C-470. This data ranges from identifying characteristics such as RSU IP address or serial number to other RSU related data such as the number of BSM messages a RSU has forwarded after receiving in the previous day. This project can be edited to display RSU data for anywhere necessary but would require changes to both the back-end specified backend and various values in the fontend to do this. This README will not cover how to go about this.
 
 ## Guidelines
 
