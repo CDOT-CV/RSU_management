@@ -11,6 +11,8 @@ This project is an open-source, proof-of-concept for the roadside unit (RSU) dat
 
 The data_manager directory contains two sub-directories: sample_files and source_code. The former directory holds the sample_files used during the design, implementation and testing of this project. The RSU-ND.json file is an example of the type of JSON string retrieved from an RSU. The sample_creds.json file is an example format of the credentials issued by the Google Cloud Platform (GCP), which is passed into the main.py script and enables the user to access the GCP.
 
+The cdot-web-app directory contains a React-js project that utilizes a RESTful API Gateway hosted through GCP to receive data about RSUs along I-70 and C-470. This data ranges from identifying characteristics such as RSU IP address or serial number to other RSU related data such as the number of BSM messages a RSU has forwarded after receiving. This project can be edited to display RSU data for anywhere necessary but would require changes to both the back-end specified backend and various values in the fontend to do this. This README will not cover how to go about this.
+
 ## Guidelines
 
 - Issues
@@ -95,6 +97,25 @@ CDOT's Cloud Function set-up refactors main.py into three Cloud Functions:
 The following diagram details the current GCS set-up of the Cloud Functions (including triggers), the required storage buckets and Pub/Sub topics, and the scheduler. 
 
 ![Diagram of GCP Cloud Function Set Up](GCP_cloud_functions/GCPfunction_setup.png?raw=true)
+
+## Google Cloud Storage (GCS) Web Hosting: Hosting the RSU Manager React Webapp
+
+1. Download the project locally using `git clone https://github.com/CDOT-CV/RSU_Management.git`
+2. Navigate to the directory `cdot-web-app` within a command line or shell with npm installed
+3. Install all of the dependencies for the project `npm install`
+4. Feel free to verify if the project runs locally: `npm start`
+5. Build the project as a deployable build: `npm run build`
+6. Create a GCP Cloud Storage bucket. Making the bucket's access rules secure is highly recommended but not required.
+7. Upload the entire `build/` directory located at `RSU_Management/cdot-web-app/build/`
+8. Upload `RSU_Management/cdot-web-app/app.yaml` separately to the root of the bucket. The only two things in the root will be this file and the build directory.
+9. Open the GCP dashboard shell from the top right corner of the screen.
+10. Select the GCP project you created the bucket in `gcloud config set project [PROJECT_ID]`
+11. Create a directory where the website will host its files from: `mkdir rsu_manager`
+12. Sync the files from the bucket to this directory: `gsutil rsync -r gs://your-bucket-name rsu_manager/`
+13. Change the active directory to the new directory: `cd rsu_manager`
+14. Start the web server hosting: `gcloud app deploy`
+15. This will take a few minutes but once it is done, it will display the URL for the hosted site.
+16. Navigate to the URL to see the now running RSU Manager Webapp.
 
 ## Contributors
 For any questions, contact Dhivahari Vivek at dhivahari.vivekanandasarma@state.co.us.
