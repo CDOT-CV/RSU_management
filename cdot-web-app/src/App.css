@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.popop-h2 {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.popop-p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.marker-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
