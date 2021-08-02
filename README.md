@@ -102,7 +102,7 @@ The following diagram details the current GCS set-up of the Cloud Functions (inc
 
 1. Download the project locally using `git clone https://github.com/CDOT-CV/RSU_Management.git`
 2. Navigate to the directory `cdot-web-app` within a command line or shell with npm installed
-3. Install all of the dependencies for the project `npm install`
+3. Install all of the dependencies for the project: `npm install`
 4. Feel free to verify if the project runs locally: `npm start`
 5. Build the project as a deployable build: `npm run build`
 6. Create a GCP Cloud Storage bucket. Making the bucket's access rules secure is highly recommended but not required.
