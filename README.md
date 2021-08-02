@@ -108,7 +108,7 @@ The following diagram details the current GCS set-up of the Cloud Functions (inc
 6. Create a GCP Cloud Storage bucket. Making the bucket's access rules secure is highly recommended but not required.
 7. Upload the entire `build/` directory located at `RSU_Management/cdot-web-app/build/`
 8. Upload `RSU_Management/cdot-web-app/app.yaml` separately to the root of the bucket. The only two things in the root will be this file and the build directory.
-9. Open the GCP dashboard shell from the top right corner of the screen.
+9. Open the GCP dashboard shell from the top right corner of the screen on the GCP dashboard.
 10. Select the GCP project you created the bucket in `gcloud config set project [PROJECT_ID]`
 11. Create a directory where the website will host its files from: `mkdir rsu_manager`
 12. Sync the files from the bucket to this directory: `gsutil rsync -r gs://your-bucket-name rsu_manager/`
