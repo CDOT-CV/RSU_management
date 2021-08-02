@@ -118,4 +118,4 @@ The following diagram details the current GCS set-up of the Cloud Functions (inc
 16. Navigate to the URL to see the now running RSU Manager Webapp.
 
 ## Contributors
-For any questions, contact Dhivahari Vivek at dhivahari.vivekanandasarma@state.co.us.
+For any questions, contact Ashley Nylen at ashley.nylen@state.co.us.
