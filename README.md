@@ -11,7 +11,7 @@ This project is an open-source, proof-of-concept for the roadside unit (RSU) dat
 
 The data_manager directory contains two sub-directories: sample_files and source_code. The former directory holds the sample_files used during the design, implementation and testing of this project. The RSU-ND.json file is an example of the type of JSON string retrieved from an RSU. The sample_creds.json file is an example format of the credentials issued by the Google Cloud Platform (GCP), which is passed into the main.py script and enables the user to access the GCP.
 
-The cdot-web-app directory contains a React-js project that utilizes a RESTful API Gateway hosted through GCP to receive data about RSUs along I-70 and C-470. This data ranges from identifying characteristics such as RSU IP address or serial number to other RSU related data such as the number of BSM messages a RSU has forwarded after receiving in the previous day. This project can be edited to display RSU data for anywhere necessary but would require changes to both the back-end specified backend and various values in the fontend to do this. This README will not cover how to go about this.
+The cdot-web-app directory contains a React-js project that utilizes a RESTful API Gateway hosted through GCP to receive data about RSUs along I-70 and C-470. This data ranges from identifying characteristics such as RSU IP address or serial number to other RSU related data such as the number of BSM messages a RSU has forwarded after receiving in the previous day. This project can be edited to display RSU data for anywhere necessary but would require changes to both the back-end and various values in the fontend to do this. This README will not cover how to go about this.
 
 ## Guidelines
 
@@ -97,6 +97,33 @@ CDOT's Cloud Function set-up refactors main.py into three Cloud Functions:
 The following diagram details the current GCS set-up of the Cloud Functions (including triggers), the required storage buckets and Pub/Sub topics, and the scheduler. 
 
 ![Diagram of GCP Cloud Function Set Up](GCP_cloud_functions/GCPfunction_setup.png?raw=true)
+
+## Required Tools For Running The RSU Manager React Webapp
+
+- Mapbox Access Token
+  - Create account at https://www.mapbox.com/
+  - An access token will be provided on the account page once the account has been created
+  - Put the access key in the "sample.env.local" file for REACT_APP_MAPBOX_TOKEN and rename the file ".env.local"
+- npm
+  - Download instructions: https://docs.npmjs.com/downloading-and-installing-node-js-and-npm
+- Nodejs
+  - Download instructions: https://nodejs.org/en/download/
+
+## Editing Mapbox Style
+
+### Edit Styles
+1. Login to https://www.mapbox.com/ and go to https://studio.mapbox.com/
+2. Select "Upload Style"
+3. Locate the 'cdot-web-app/style/style.json' and upload it
+4. Now you can make edits
+
+### Save Styles
+1. Once you are done editing, save the style
+2. Click share style
+3. Download zip
+4. Paste the new "style.json" inside the zip in 'cdot-web-app/style/'
+
+To use a new style, the style URL from Mapbox Studio must be pasted in the ".env.local" file for REACT_APP_MAPBOX_STYLE.
 
 ## Google Cloud Storage (GCS) Web Hosting: Hosting the RSU Manager React Webapp
 
