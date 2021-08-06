@@ -44,7 +44,7 @@ function Map(props) {
       <ReactMapGL 
         {...viewport} 
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        mapStyle="mapbox://styles/drewjj/ckr1p5ulb4uys18quax950ia4"
+        mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
         onViewportChange={(viewport) => {
           setViewport(viewport);
         }}>
