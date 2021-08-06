@@ -5,8 +5,6 @@ import Header from './Header';
 
 const axios = require('axios').default;
 
-const REACT_APP_MAPBOX_TOKEN = "pk.eyJ1IjoiZHJld2pqIiwiYSI6ImNrcWtqMGU5YzNlNDgycGxjNmw0NWQ0eGsifQ.jMxZO_Qs38YyYc137cNCew";
-
 function Map(props) {
   const [viewport, setViewport] = useState({
     latitude: 39.7392,
@@ -45,7 +43,7 @@ function Map(props) {
     <div>
       <ReactMapGL 
         {...viewport} 
-        mapboxApiAccessToken={REACT_APP_MAPBOX_TOKEN}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/drewjj/ckr1p5ulb4uys18quax950ia4"
         onViewportChange={(viewport) => {
           setViewport(viewport);
