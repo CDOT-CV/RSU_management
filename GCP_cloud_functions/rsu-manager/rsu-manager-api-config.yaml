@@ -1,0 +1,39 @@
+# rsu-manager-api-config.yaml
+swagger: '2.0'
+info:
+  title: rsu-manager-api
+  description: RSU Manager API Gateway
+  version: 1.0.0
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /rsuinfo:
+    get:
+      summary: Get RSU info
+      operationId: getRsuinfo
+      x-google-backend:
+        address: https://us-central1-cdot-oim-cv-dev.cloudfunctions.net/rsu-manager-functions
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string
+  /rsucounts/{rsuIp}:
+    get:
+      summary: Get RSU counts for specified RSU IP
+      parameters:
+        - in: path
+          name: rsuIp
+          type: string
+          required: true
+          description: IP address for the specified RSU.
+      operationId: getRsucounts
+      x-google-backend:
+        address: https://us-central1-cdot-oim-cv-dev.cloudfunctions.net/rsu-query-counts
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            type: string

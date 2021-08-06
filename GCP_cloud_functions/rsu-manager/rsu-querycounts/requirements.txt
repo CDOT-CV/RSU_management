@@ -1,0 +1,2 @@
+DateTime==4.3
+google-cloud-bigquery==2.23.2
