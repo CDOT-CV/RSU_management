@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import ReactMapGL, { Marker, Popup } from "react-map-gl"
 import RsuMarker from './RsuMarker';
 import Header from './Header';
+import mbStyle from '../styles/mb_style.json';
 
 const axios = require('axios').default;
 
@@ -44,7 +45,7 @@ function Map(props) {
       <ReactMapGL 
         {...viewport} 
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        mapStyle={process.env.REACT_APP_MAPBOX_STYLE}
+        mapStyle={mbStyle}
         onViewportChange={(viewport) => {
           setViewport(viewport);
         }}>

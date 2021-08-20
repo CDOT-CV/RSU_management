@@ -1,11 +1,10 @@
-import time
 from google.cloud import bigquery
 from datetime import datetime, timedelta
 
 def query_rsu_counts(rsu_ip):
     client = bigquery.Client()
     
-    tablename = "cdot-oim-cv-dev.RsuManagerDataset.rsucounts"
+    tablename = os.environ["COUNT_DB_NAME"]
     yesterday = datetime.now() - timedelta(1)
     yesterday = datetime.strftime(yesterday, '%Y-%m-%d')
 
